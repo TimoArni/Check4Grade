@@ -26,5 +26,5 @@ jobs:
         run: python check_feed.py
         env:
           # FEED_URL: "https://myhaw.haw-hamburg.de/qisserver/pages/cs/sys/portal/feed/portalMessagesFeed.faces?user=27fdb080-5ce8-11ef-9081-c6c7fa19564427fdb080-5ce8-11ef-9081-c6c7fa195644&hash=26934607162776d8504095ea013d1099"
-          FEED_URL: "https://feeds.bbci.co.uk/news/rss.xml"
+          FEED_URL: "https://www.spiegel.de/schlagzeilen/index.rss"
           PROWL_API_KEY: ${{ secrets.PROWL_API_KEY }}
