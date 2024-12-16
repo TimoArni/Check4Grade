@@ -1,0 +1,29 @@
+name: Check Uni RSS Feed
+
+on:
+  schedule:
+    # Runs every 30 minutes between 05:00 and 22:30 UTC
+    # which corresponds approximately to 06:00 and 23:30 CET.
+    - cron: "0,30 5-22 * * *"
+  workflow_dispatch:
+
+jobs:
+  check_feed:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Python dependencies
+        run: pip install feedparser requests
+
+      - name: Run feed check
+        run: python check_feed.py
+        env:
+          FEED_URL: "https://myhaw.haw-hamburg.de/qisserver/pages/cs/sys/portal/feed/portalMessagesFeed.faces?user=27fdb080-5ce8-11ef-9081-c6c7fa19564427fdb080-5ce8-11ef-9081-c6c7fa195644&hash=26934607162776d8504095ea013d1099"
+          PROWL_API_KEY: ${{ secrets.PROWL_API_KEY }}
